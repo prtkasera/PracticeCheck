@@ -20,15 +20,30 @@
 	<property name="location" value="classpath:dbInfo.properties"></property>
 	</bean>
 	
-	<bean id="datasource" class="com.cogniznt.helper.DataSource">
+	<bean id="datasource" class="com.cognizant.helper.DataSource">
 	<property name="driver" value="${driver}"></property>
 	<property name="url" value="${url}"></property>
 	<property name="username" value="${username}"></property>
 	<property name="password" value="${password}"></property>
 	</bean>
 	
-	<bean id="productquery" class="com.cogniznt.helper.ProductQuery">
+	<bean id="productquery" class="com.cognizant.helper.ProductQuery">
 	<property name="selectAllProductsQuery" value="select * from product"></property>
+	<property name="selectProductCategoryName" value="select category_name from product_categories"></property>
+	<property name="insertProduct" value="insert into product values(?,?,?,?,?)"></property>
+	<property name="checkProduct" value="select * from product where product_id=? or category=?"></property>
 	</bean>
+	
+	<bean id="messageSource" class="org.springframework.context.support.ReloadableResourceBundleMessageSource">
+	<property name="basenames">
+	<list>
+	<value>
+	WEB-INF/resources/error
+	</value>
+	</list>
+	</property>
+	
+	</bean>
+	
 	
 </beans>

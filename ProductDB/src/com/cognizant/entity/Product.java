@@ -8,6 +8,10 @@ public class Product {
 	private String product_description;
 	private float product_price;
 	
+	public void setProduct_price(float product_price) {
+		this.product_price = product_price;
+	}
+
 	public Product(){}
 	
 	public int getProduct_id() {
@@ -37,9 +41,7 @@ public class Product {
 	public float getProduct_price() {
 		return product_price;
 	}
-	public void setProduct_price(float product_price) {
-		this.product_price = product_price;
-	}
+	
 	
 	
 	
