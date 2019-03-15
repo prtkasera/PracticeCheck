@@ -103,9 +103,10 @@ public boolean insertProduct(Product product) {
 	return productInserted;
 }
 @Override
-public boolean checkProduct(Product product) {
+public int checkProduct(Product product) {
 	Connection conn=manager.openConnection();
-	boolean productExist=false;
+	int productExist=0;
+	Product productDB=new Product();
 	try {
 		PreparedStatement ps=conn.prepareStatement(productQuery.getCheckProduct());
 		ps.setInt(1,product.getProduct_id());
@@ -113,11 +114,24 @@ public boolean checkProduct(Product product) {
 		ResultSet rs=ps.executeQuery();
 		while(rs.next())
 		{
-			productExist=true;
+			productDB.setProduct_id(rs.getInt("product_id"));
+			productDB.setProduct_category(rs.getString("category"));
 		}
 	} catch (SQLException e) {
 		// TODO Auto-generated catch block
 		e.printStackTrace();
+	}
+	if(productDB.getProduct_id()==product.getProduct_id())
+	{
+		productExist=1;
+	}
+	else if(productDB.getProduct_category().equals(product.getProduct_category()))
+	{
+		productExist=2;
+	}
+	else if(productDB.getProduct_id()==product.getProduct_id() && productDB.getProduct_category().equals(product.getProduct_category()))
+	{
+		productExist=3;
 	}
 	
 	// TODO Auto-generated method stub

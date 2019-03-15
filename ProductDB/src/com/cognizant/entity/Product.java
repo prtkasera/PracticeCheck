@@ -1,11 +1,32 @@
 package com.cognizant.entity;
 
-public class Product {
+import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.Id;
+import javax.persistence.NamedQueries;
+import javax.persistence.NamedQuery;
+import javax.persistence.Table;
 
+@Entity
+@Table(name="product")
+@NamedQueries(
+		{
+			@NamedQuery(name="findAllProducts",query="select o from Product o"),
+			@NamedQuery(name="checkProduct",query="select o from Product o where o.product_id=?1 or o.product_category=?2)")
+		}
+		)
+public class Product {
+	
+	@Id
+	@Column(name="product_id")
 	private int product_id;
+	@Column(name="category")
 	private String product_category;
+	@Column(name="name")
 	private String product_name;
+	@Column(name="description")
 	private String product_description;
+	@Column(name="price")
 	private float product_price;
 	
 	public void setProduct_price(float product_price) {

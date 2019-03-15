@@ -24,11 +24,20 @@ public class ProductValidator implements Validator {
 	public void validate(Object arg0, Errors arg1) {
 		// TODO Auto-generated method stub
 		Product product=(Product)arg0;
-		boolean productExists=productService.checkProduct(product);
-		if(productExists)
+		int productExist=productService.checkProduct(product);
+		System.out.println("productExist:"+productExist);
+		if(productExist==1)
 		{
 			arg1.rejectValue("product_id","com.cognizant.entity.Product.product_id.duplicate");
-		
+		}
+		else if(productExist==2)
+		{
+			arg1.rejectValue("product_category","com.cognizant.entity.Product.product_category.duplicate");
+		}
+		else if(productExist==3)
+		{
+			arg1.rejectValue("product_id","com.cognizant.entity.Product.product_id.duplicate");
+			arg1.rejectValue("product_category","com.cognizant.entity.Product.product_category.duplicate");
 		}
 	}
 	

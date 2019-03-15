@@ -10,7 +10,7 @@ import com.cognizant.dao.ProductDAO;
 import com.cognizant.entity.Product;
 @Service
 public class ProductServiceImpl implements ProductService{
-    @Autowired@Qualifier("JDBCProductDAOImpl")
+    @Autowired@Qualifier("HibernateSessionProductDAOImpl")
 	private ProductDAO productDAO;
 	@Override
 	public List<Product> getAllProducts() {
@@ -28,7 +28,7 @@ public class ProductServiceImpl implements ProductService{
 		return productDAO.insertProduct(product);
 	}
 	@Override
-	public boolean checkProduct(Product product) {
+	public int checkProduct(Product product) {
 		// TODO Auto-generated method stub
 		return productDAO.checkProduct(product);
 	}
